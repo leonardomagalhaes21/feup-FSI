@@ -38,7 +38,7 @@ Obtivemos as instruções para utilizar o exploit encontrado num repositório do
 
 Utilizando o script Python, executámos o seguinte comando na consola:
 
-mstore-api.py -u http://143.47.40.175:5001/
+$ python3 mstore-api.py -u http://143.47.40.175:5001/
 
 Isso retornou o seguinte output:
 
