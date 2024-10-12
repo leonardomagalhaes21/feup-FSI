@@ -7,7 +7,18 @@ Abaixo, mostramos as capturas de ecrã que ilustram a nossa análise inicial:
 
 1. **Versões Identificadas no Código Fonte**
     - Encontrámos as versões do WordPress, MStore API, WooCommerce Plugin e Booster for WooCommerce Plugin na descrição de um artigo do website.  
-    _*(Imagem HTML do código fonte)*_
+ ![htmlprt](/docs/images/htmlprint.png)
+ <br>
+
+
+
+
+
+
+
+ ![versionsprt](/docs/images/versions.png)
+
+
 
 ## Pesquisa de Vulnerabilidades (CVE)
 
@@ -20,8 +31,8 @@ A falha permite que utilizadores não autenticados obtenham acesso a qualquer co
 
 ### Informação do Exploit
 
-Obtivemos as instruções para utilizar o exploit num repositório do GitHub.  
-_*(Imagem do tutorial no GitHub)*_
+Obtivemos as instruções para utilizar o exploit encontrado num repositório do GitHub.  
+![exploit](docs/images/exploit.png)
 
 ## Execução do Exploit
 
@@ -34,16 +45,19 @@ Isso retornou o seguinte output:
 http://143.47.40.175:5001/wp-json/wp/v2/add-listing?id=1
 
 À primeira vista, pareceu não acontecer nada, mas ao recarregar a página inicial do website, já estávamos logados como admin.
-(Imagem do site em modo admin)
+![adminloggin](docs/images/adminlogin.png)
 
 Exploração no Painel Admin
 
 Com o acesso ao painel de administração, navegámos até à tab "Posts", onde encontrámos um post privado que continha a flag.
-(Imagem do post privado)
+![adminpainel](docs/images/adminpainel.png)
+
+![hiddenmsg](docs/images/hiddenmessage.png)
 
 flag obtida: flag{byebye}
 
 ## Método Alternativo
 
 Poderíamos também ter encontrado a flag utilizando a funcionalidade de pesquisa no site, pesquisando por "flag". No entanto, esse cenário seria irrealista, pois já sabíamos previamente o que estávamos a procurar.
-(Imagem da pesquisa pela flag)
+![flagsrch](docs/images/flagsearch.png)
+![flagfound](docs/images/flagfound.png)
