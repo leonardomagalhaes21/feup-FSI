@@ -32,6 +32,7 @@ A falha permite que utilizadores não autenticados obtenham acesso a qualquer co
 ### Informação do Exploit
 
 Obtivemos as instruções para utilizar o exploit encontrado num repositório do GitHub.  
+
 ![exploit](docs/images/exploit.png)
 
 ## Execução do Exploit
@@ -45,19 +46,23 @@ Isso retornou o seguinte output:
 http://143.47.40.175:5001/wp-json/wp/v2/add-listing?id=1
 
 À primeira vista, pareceu não acontecer nada, mas ao recarregar a página inicial do website, já estávamos logados como admin.
+
 ![adminloggin](docs/images/adminlogin.png)
 
-Exploração no Painel Admin
+#### Exploração no Painel Admin
 
 Com o acesso ao painel de administração, navegámos até à tab "Posts", onde encontrámos um post privado que continha a flag.
+
+
 ![adminpainel](docs/images/adminpainel.png)
 
 ![hiddenmsg](docs/images/hiddenmessage.png)
 
-flag obtida: flag{byebye}
+**flag obtida: flag{byebye}**
 
 ## Método Alternativo
 
 Poderíamos também ter encontrado a flag utilizando a funcionalidade de pesquisa no site, pesquisando por "flag". No entanto, esse cenário seria irrealista, pois já sabíamos previamente o que estávamos a procurar.
+
 ![flagsrch](docs/images/flagsearch.png)
 ![flagfound](docs/images/flagfound.png)
