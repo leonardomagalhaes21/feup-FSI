@@ -18,13 +18,18 @@ Compreendendo como o **Shellshock** explora o Bash, podemos ver que a injeção 
 
 Para melhor compreender a estrutura do sistema e os ficheiros que este contém, começamos por testar várias alternativas e comandos. O objetivo era explorar as diferentes pastas e ficheiros no sistema, procurando qualquer indicador que pudesse levar à solução da tarefa.
 
+![ls_code](docs/images/ls_code.jpeg)
+![ls](docs/images/ls.jpeg)
 
 
 ## Exploração da Diretoria `/var`
 
 Depois de percorrer várias diretórias e listar os seus conteúdos, encontramos uma pasta de particular interesse: **/var**. Ao investigarmos mais, descobrimos dentro desta diretoria uma subpasta chamada **flag**, que continha um ficheiro com o nome `flag.txt`.
 
-
+![ls_var_code](docs/images/ls_var_code.jpeg)
+![ls_var](docs/images/ls_var.jpeg)
+![ls_flag_code](docs/images/ls_flag_code.jpeg)
+![ls_flag](docs/images/ls_flag.jpeg)
 
 ## Comandos com o Símbolo `;`
 
@@ -58,7 +63,7 @@ Após realizar as explorações e combinações de comandos com sucesso, chegamo
 
 Esta combinação de comandos permitiu obter o conteúdo da flag no ficheiro desejado e assim completar o desafio.
 
-![exploit](docs/images/flag.jpeg)
+![flag](docs/images/flag.jpeg)
 
 ## Conclusão
 
