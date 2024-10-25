@@ -54,11 +54,14 @@ Após realizar as explorações e combinações de comandos com sucesso, chegamo
 '; cat /var/flag/flag.txt'
 ```
 
+![exploit](docs/images/exploit.jpeg)
+
 - **;** é utilizado para encadear a execução de comandos.
 - **cat/var/flag/flag.txt** serve para exibir o conteúdo do ficheiro `flag.txt`.
 
 Esta combinação de comandos permitiu obter o conteúdo da flag no ficheiro desejado e assim completar o desafio.
 
+![exploit](docs/images/flag.jpeg)
 
 ## Conclusão
 
