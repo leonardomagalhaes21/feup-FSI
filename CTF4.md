@@ -50,9 +50,6 @@ Com o uso de aspas simples `'`, conseguimos encapsular o comando de forma a ser 
 
 Após realizar as explorações e combinações de comandos com sucesso, chegamos à seguinte solução final para obter o conteúdo do ficheiro `flag.txt`:
 
-```bash
-'; cat /var/flag/flag.txt'
-```
 
 ![exploit](docs/images/exploit.jpeg)
 
