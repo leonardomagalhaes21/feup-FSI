@@ -16,10 +16,10 @@ $ echo 'hello' | nc 10.9.0.5 9090
 ```
 
 The server returned necessary information for the following tasks:
-•	Input buffer address
-•	Secret message address
-•	Addresses of a target variable
-•	Frame pointer for the myprintf function
+- Input buffer address
+- Secret message address
+- Addresses of a target variable
+- Frame pointer for the myprintf function
 
 
 ## Task 1
@@ -119,16 +119,16 @@ The target variable was now 0x00005000.
 
 CWE-134 format string vulnerabilities occur when user-controlled data is unsafely passed to formatting functions, allowing attackers to manipulate memory via format specifiers.
 When the format string is on the stack:
-•	Reading stack data is easier using %x or %s, as stack addresses and data are accessible.
-•	Writing to the stack with %n allows attackers to overwrite critical stack values, like local variables or return addresses.
+Reading stack data is easier using %x or %s, as stack addresses and data are accessible.
+Writing to the stack with %n allows attackers to overwrite critical stack values, like local variables or return addresses.
 If the format string is on the heap:
-•	Reading and writing to the stack becomes difficult, as %x and %n would target the heap instead.
-•	Attacks relying on stack manipulation, like reading stack addresses or overwriting variables, would fail or be less effective.
+Reading and writing to the stack becomes difficult, as %x and %n would target the heap instead.
+Attacks relying on stack manipulation, like reading stack addresses or overwriting variables, would fail or be less effective.
 Allocating the format string on the stack makes attacks easier, while placing it on the heap complicates exploitation, though it doesn't eliminate the risk.
 
-Task 2.A - Reading Stack Addresses: The %x attack, which reveals stack addresses, would fail because it depends on accessing stack memory. With the format string on the heap, only heap addresses would be revealed.
-Task 2.B (Reading String from Heap): While this attack relies on reading from a specific heap address, the format string's location in the heap would make it harder to control and predict the memory layout, making the attack less reliable.
-Task 3.A - Writing to Stack Variables with %n: Modifying stack variables using %n would also not work since %n would write to heap memory, not affecting the stack variables.
-Task 3.B - Setting a Specific Value on the Stack with %n: Writing a specific value to the stack with %n would fail because %n would target the heap instead of the intended stack address.
+- Task 2.A - Reading Stack Addresses: The %x attack, which reveals stack addresses, would fail because it depends on accessing stack memory. With the format string on the heap, only heap addresses would be revealed.
+- Task 2.B (Reading String from Heap): While this attack relies on reading from a specific heap address, the format string's location in the heap would make it harder to control and predict the memory layout, making the attack less reliable.
+- Task 3.A - Writing to Stack Variables with %n: Modifying stack variables using %n would also not work since %n would write to heap memory, not affecting the stack variables.
+- Task 3.B - Setting a Specific Value on the Stack with %n: Writing a specific value to the stack with %n would fail because %n would target the heap instead of the intended stack address.
 
 
