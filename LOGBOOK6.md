@@ -7,7 +7,7 @@ To start, we disabled address randomization, as the program's address layout and
 $ sudo sysctl -w kernel.randomize_va_space=0
 ```
 
-The server's program.c was compiled with the -z execstack flag to allow code execution within the stack.
+The server's program.c was compiled with the **-z execstack** flag to allow code execution within the stack.
 
 We then opened two terminals, one with the server using Docker from Seed Labs and another as a client to communicate with the servers. This setup allowed us to observe messages exchanged between both sides. We then send the string asked to the server:
 
