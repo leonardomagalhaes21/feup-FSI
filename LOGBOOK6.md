@@ -133,7 +133,7 @@ int main() {
 The target variable was now 0x00005000.
 
 
-# Question 2:
+# Question 2
 
 CWE-134 format string vulnerabilities occur when user-controlled data is unsafely passed to formatting functions, allowing attackers to manipulate memory via format specifiers.
 When the format string is on the stack:
