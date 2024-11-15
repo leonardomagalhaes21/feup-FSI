@@ -1,4 +1,3 @@
-
 Breve descrição do grupo
 
 * Turno: 15
