@@ -3,6 +3,8 @@
 ## Accessing the Website
 We navigated to the provided address [http://ctf-fsi.fe.up.pt:5007](http://ctf-fsi.fe.up.pt:5007), using **Google Chrome** (the exploit does not work on Firefox) and explored the site's functionalities as a regular user.
 
+![websitePhoto](/docs/images/s.png)
+
 ---
 
 ## Searching for Known Vulnerabilities
