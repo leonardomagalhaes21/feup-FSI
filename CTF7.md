@@ -8,7 +8,7 @@ We navigated to the provided address [http://ctf-fsi.fe.up.pt:5007](http://ctf-f
 ---
 
 ## Searching for Known Vulnerabilities
-1. We searched for information about vulnerabilities related to the service and found out about copyparty. We then used the following search term in Google:  `copyparty cve xss` and found an exploit published on [https://www.exploit-db.com/exploits/51635](https://www.exploit-db.com/exploits/51635), describing a **Reflected XSS** vulnerability.
+We searched for information about vulnerabilities related to the service and found out about copyparty. We then used the following search term in Google:  `copyparty cve xss` and found an exploit published on [https://www.exploit-db.com/exploits/51635](https://www.exploit-db.com/exploits/51635), describing a **Reflected XSS** vulnerability.
 
 ---
 
@@ -31,7 +31,7 @@ http://ctf-fsi.fe.up.pt:5007/?k304=y%0D%0A%0D%0A%3Cimg+src%3Dcopyparty+onerror%3
 
 ---
 
-## 4. Modifying the Exploit to Retrieve the Flag
+## Modifying the Exploit to Retrieve the Flag
 We replaced the alert code with a script to fetch the protected `flag.txt` file and display its content in an alert.
 
 Adapted code:
