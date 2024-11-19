@@ -145,7 +145,7 @@ which gave us the output `$P$BuRuB0Mi3926H8h.hcA3pSrUPyq0o10:heartbroken` (see p
 
 So now we have the original password used: `heartbroken`, just like all of us.
 
-# Task 6: 
+# Task 6: Reflection
 Hashing is a one-way process designed to securely store passwords without exposing the plaintext. It enhances security by using techniques like salting (adding randomness) and iterations (repeated hashing) to make brute-force and precomputed attacks (e.g., rainbow tables) more difficult. However, hashes can still be cracked if passwords are weak, or if outdated algorithms like MD5 are used. Tools like Hashcat and John the Ripper can test millions of password guesses efficiently. Modern algorithms like bcrypt or Argon2 offer stronger protection by enforcing high computational costs and unique salts.
 
 To improve security, organizations should: use modern hashing algorithms, Enforce strong password policies and implement rate-limiting and account lockouts to deter brute-force attacks.
