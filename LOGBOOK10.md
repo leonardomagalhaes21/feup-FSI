@@ -59,7 +59,7 @@ To perform the length extension attack, we calculated the following padding: %80
 
 ## Task 3: Executing the Length Extension Attack
 
-Using length_ext, we calculated a new MAC for the modified message:
+Using length_ext, we modified the MAC to the obtained in Task 1 (c117a26cbfd88693ebb7779c7238b4321ba5732f015a707c1c14ec2f04b0144a) and appended the parameter &download=secret.txt in the additional message. We then calculated a new MAC for the modified message:
 
 ![length_ext](/docs/images/length_ext.png)
 
