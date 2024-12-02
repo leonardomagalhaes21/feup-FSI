@@ -1,8 +1,8 @@
-#Hash Length Extension
+# Hash Length Extension
 
-###Setup
+### Setup
 
-We started by adding necessary entries to the etc/hosts file to configure our environment.
+We started by adding 10.9.0.80 www.seedlab-hashlen.com to the etc/hosts file to configure our environment.
 
 Using Docker from Seed Labs, we initiated the server setup with the following commands:
 
@@ -13,7 +13,7 @@ docker-compose up
 
 In a separate terminal, we set up the client to communicate with the server. This setup allowed us to observe the messages exchanged between the client and the server.
 
-##Task 1
+## Task 1
 
 We sent the required string to the server. First, we generated a message authentication code (MAC) using sha256sum. For this, we opened key.txt, selected 1004 as the user ID (UID), and used 88zjxc as the key, with the name set to DavidGustavo.
 
@@ -32,7 +32,7 @@ http://www.seedlab-hashlen.com/?myname=DavidGustavo&uid=1004&lstcmd=1&mac=c117a2
 ![list_files](/docs/images/listing.png)
 
 
-###Downloading a File:
+### Downloading a File:
 
 To request secret.txt from the server, we repeated the process with an additional download parameter:
 
@@ -48,16 +48,16 @@ http://www.seedlab-hashlen.com/?myname=DavidGustavo&uid=1004&lstcmd=1&download=s
 
 ![download_file](/docs/images/download.png)
 
-##Task 2: Padding the Message
+## Task 2: Padding the Message
 
-The message is: 88zjxc:myname=DavidGustavo&uid=1004&lstcmd=1
-Length of the message: 44 bytes.
+- The message is 88zjxc:myname=DavidGustavo&uid=1004&lstcmd=1
+- Length of the message: 44 bytes.
 
 So the padding is 64 - 44 = 20 bytes, including 8 bytes of the length field. The length of the message in term of bits is 44 * 8 = 352 = 0x160. 
 
 To perform the length extension attack, we calculated the following padding: %80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%01%60
 
-##Task 3: Executing the Length Extension Attack
+## Task 3: Executing the Length Extension Attack
 
 Using length_ext, we calculated a new MAC for the modified message:
 
