@@ -29,7 +29,7 @@ This resulted in the following URL:
 http://www.seedlab-hashlen.com/?myname=DavidGustavo&uid=1004&lstcmd=1&mac=c117a26cbfd88693ebb7779c7238b4321ba5732f015a707c1c14ec2f04b0144a
 
 
-![list_files](/docs/images/listing.png)
+![list_files](/docs/images/list_files.png)
 
 
 ### Downloading a File:
@@ -46,7 +46,7 @@ The output was:
 Resulting URL:
 http://www.seedlab-hashlen.com/?myname=DavidGustavo&uid=1004&lstcmd=1&download=secret.txt&mac=0930eecd64b273ed602bb3e1246013622a1ffcb437c1b1df63dce97e027853ae
 
-![download_file](/docs/images/download.png)
+![download_file](/docs/images/download_file.png)
 
 ## Task 2: Padding the Message
 
