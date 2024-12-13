@@ -129,7 +129,7 @@ def gcd(a, b):
 
 4. Decrypting the Ciphertext
 
-With p, q, and d determined, we decrypted the ciphertext using the RSA formula m=cdmod  nm = c^d \mod nm=cdmodn.
+With p, q, and d determined, we decrypted the ciphertext using the RSA formula m=c^d mod  n
 
 ```python
 
