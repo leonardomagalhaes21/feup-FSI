@@ -1,6 +1,6 @@
-#CTF Semana #12 - (RSA)
+# CTF Semana #12 - (RSA)
 
-##Understand the Challenge Parameters
+## Understand the Challenge Parameters
 
 We started by analyzing the provided RSA setup:
 
@@ -15,7 +15,7 @@ public exponent 65537
 Offset is calculated as offset= ((t−1)⋅10+g)/2 , where t is the turn number (15), and g is the group number (3).
 Our goal was to decrypt the flag, encrypted using RSA, by exploiting the predictable nature of the prime numbers p and q.
 
-##Breaking Down the Problem
+## Breaking Down the Problem
 
 We needed to:
 
@@ -23,7 +23,7 @@ We needed to:
 2.	Derive the private key d using the Extended Euclidean Algorithm.
 3.	Use d to decrypt the given ciphertext.
 
-##Writing the Code
+## Writing the Code
 
 1. Primality Test (Miller-Rabin Algorithm)
 
@@ -121,7 +121,7 @@ def decrypt(ciphertext_hex, n, e, offset):
 ```
 
 
-##Testing with the Given Data
+## Testing with the Given Data
 
 We plugged in the provided values for n, e, and the ciphertext, and calculated the offset using the given t (15) and g (3).
 
@@ -140,12 +140,12 @@ plaintext = decrypt(ciphertext_hex, n, e, offset)
 print("Message:", plaintext)
 ```
 
-##Result
+## Result
 
 When we ran our script, it successfully decrypted the ciphertext, revealing the flag:
 flag{ibufohqujsxcszgy}.
 
-##Questions
+## Questions
 
 1. Using the turn t and group g, we calculated approximate values for p and q. Then, we tested nearby numbers using the Miller-Rabin primality test to find the exact prime numbers.
 
@@ -166,7 +166,7 @@ Both conditions were satisfied, confirming our values were correct.
 2.	Found d:
 Using the Extended Euclidean Algorithm, we computed d, the modular inverse of e mod  ϕ(n):
 
-d≡(e^(-1))mod  ϕ(n)
+d=(e^(-1))mod  ϕ(n)
 
 3.	Decrypted the ciphertext:
 
