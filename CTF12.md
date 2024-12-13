@@ -154,8 +154,7 @@ print("Message:", text)
 
 ## Result
 
-When we ran our script, it successfully decrypted the ciphertext, revealing the flag:
-flag{ibufohqujsxcszgy}.
+When we ran our script, it successfully decrypted the ciphertext, revealing the flag: *flag{ibufohqujsxcszgy}*
 
 ## Questions
 
