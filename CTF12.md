@@ -31,6 +31,24 @@ We implemented the Miller-Rabin primality test to check if numbers close to the 
 
 ```python
 
+def wit(a, d, n, r):
+    x = pow(a, d, n)
+    if x == 1 or x == n - 1:
+        return False
+    for _ in range(r - 1):
+        x = pow(x, 2, n)
+        if x == n - 1:
+            return False
+    return True
+
+def random_miller(n, k):
+    from random import randint
+    for _ in range(k):
+        a = randint(2, n - 2)
+        if wit(a, n - 1, n, (n - 1).bit_length() - 1):
+            return False
+    return True
+
 def miller(n, bases=None):
     if n <= 1:
         return False
@@ -38,26 +56,30 @@ def miller(n, bases=None):
         return True
     if n % 2 == 0:
         return False
-
+    
     r, d = 0, n - 1
     while d % 2 == 0:
         r += 1
         d //= 2
 
     if bases is None:
-        bases = [2, 3]
+        if n < 2047:
+            bases = [2]
+        elif n < 1373653:
+            bases = [2, 3]
+        elif n < 25326001:
+            bases = [2, 3, 5]
+        elif n < 118670087467:
+            bases = [2, 3, 5, 7, 11]
+        elif n < 2152302898747:
+            bases = [2, 3, 5, 7, 11, 13]
+        else:
+            return random_miller(n, k=10)
 
     for a in bases:
         if a >= n:
             break
-        x = pow(a, d, n)
-        if x == 1 or x == n - 1:
-            continue
-        for _ in range(r - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                break
-        else:
+        if not wit(a, d, n, r):
             return False
     return True
 
@@ -69,17 +91,18 @@ Using the modulus n and the offset formula, we iterated over potential values fo
 
 ```python
 
-def find_primes(n, offset):
-    p_guess = 2500 + offset
-    q_guess = 2501 + offset
-
-    for dp in range(-100, 100):
+def find_primes(n, offset, range_limit=100000000):
+    t = 500 + offset
+    p_guess = 2 ** t
+    
+    for dp in range(0, range_limit):
         p = p_guess + dp
         if miller(p):
             q = n // p
             if n % p == 0 and miller(q):
                 return p, q
     raise ValueError("Primes not found.")
+
 ```
 
 3. Calculating the Private Key d
@@ -87,19 +110,20 @@ def find_primes(n, offset):
 Using the Extended Euclidean Algorithm, we computed the modular inverse of e mod (p−1)(q−1), giving us d, the private key.
 
 ```python
-def inverse(e, phi):
-    def gcd(a, b):
-        if b == 0:
-            return a, 1, 0
-        g, x1, y1 = gcd(b, a % b)
-        x = y1
-        y = x1 - (a // b) * y1
-        return g, x, y
 
+def inverse(e, phi):
     g, x, _ = gcd(e, phi)
     if g != 1:
-        raise ValueError("Modular inverse does not exist")
+        raise ValueError("modular inverse do not exist")
     return x % phi
+
+def gcd(a, b):
+    if b == 0:
+        return a, 1, 0
+    g, x1, y1 = gcd(b, a % b)
+    x = y1
+    y = x1 - (a // b) * y1
+    return g, x, y
 
 ```
 
@@ -113,14 +137,17 @@ import binascii
 
 def decrypt(ciphertext_hex, n, e, offset):
     p, q = find_primes(n, offset)
+    
     phi = (p - 1) * (q - 1)
     d = inverse(e, phi)
-
-    ciphertext = int(ciphertext_hex, 16)
+    
+    ciphertext = int.from_bytes(binascii.unhexlify(ciphertext_hex), "little")
+    
     plaintext_int = pow(ciphertext, d, n)
-    plaintext_bytes = plaintext_int.to_bytes((plaintext_int.bit_length() + 7) // 8, 'big')
-
+    plaintext_bytes = plaintext_int.to_bytes((plaintext_int.bit_length() + 7) // 8, 'little')
+    
     return plaintext_bytes.decode()
+
 ```
 
 
@@ -139,8 +166,8 @@ t = 15
 offset = ((t - 1) * 10 + g) // 2
 
 # Decrypt
-plaintext = decrypt(ciphertext_hex, n, e, offset)
-print("Message:", plaintext)
+text = decrypt(ciphertext_hex, n, e, offset)
+print("Message:", text)
 ```
 
 ## Result
@@ -150,7 +177,9 @@ flag{ibufohqujsxcszgy}.
 
 ## Questions
 
-### Using the turn t and group g, we calculated approximate values for p and q. Then, we tested nearby numbers using the Miller-Rabin primality test to find the exact prime numbers.
+### How did we use the information provided to infer the values used in the RSA encryption of the flag?
+
+We used the formulas provided to estimate p and q. Then, we tested nearby numbers using the Miller-Rabin primality test to find the exact prime numbers. Finally, we verified that n=p⋅q to confirm their correctness.
 
 
 ### How did we confirm that our inference was correct?
