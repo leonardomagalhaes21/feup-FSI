@@ -150,18 +150,18 @@ flag{ibufohqujsxcszgy}.
 
 ## Questions
 
-1. Using the turn t and group g, we calculated approximate values for p and q. Then, we tested nearby numbers using the Miller-Rabin primality test to find the exact prime numbers.
+### Using the turn t and group g, we calculated approximate values for p and q. Then, we tested nearby numbers using the Miller-Rabin primality test to find the exact prime numbers.
 
 
-2. How did we confirm that our inference was correct?
+### How did we confirm that our inference was correct?
 
 After calculating p and q, we confirmed their correctness by:
-•	Verifying that p⋅q=n
-•	Ensuring that both p and q are prime using the Miller-Rabin primality test.
+- Verifying that p⋅q=n
+- Ensuring that both p and q are prime using the Miller-Rabin primality test.
 
 Both conditions were satisfied, confirming our values were correct.
 
-3. How did we extract the key from the ciphertext?
+### How did we extract the key from the ciphertext?
 
 - Calculated ϕ(n):
 ϕ(n)=(p−1)⋅(q−1)
@@ -176,7 +176,7 @@ d=(e^(-1))mod  ϕ(n)
 Converted the ciphertext from hexadecimal to a decimal number.
 Applied the RSA decryption formula: m=(c^d)mod  n 
 
-4.	Converted the message to text:
+- Converted the message to text:
 
 After obtaining m, we decoded it to retrieve the original message.
 
