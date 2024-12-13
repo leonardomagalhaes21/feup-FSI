@@ -31,16 +31,6 @@ We implemented the Miller-Rabin primality test to check if numbers close to the 
 
 ```python
 
-def wit(a, d, n, r):
-    x = pow(a, d, n)
-    if x == 1 or x == n - 1:
-        return False
-    for _ in range(r - 1):
-        x = pow(x, 2, n)
-        if x == n - 1:
-            return False
-    return True
-
 def random_miller(n, k):
     from random import randint
     for _ in range(k):
@@ -116,14 +106,6 @@ def inverse(e, phi):
     if g != 1:
         raise ValueError("modular inverse do not exist")
     return x % phi
-
-def gcd(a, b):
-    if b == 0:
-        return a, 1, 0
-    g, x1, y1 = gcd(b, a % b)
-    x = y1
-    y = x1 - (a // b) * y1
-    return g, x, y
 
 ```
 
