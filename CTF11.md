@@ -70,15 +70,101 @@ This code performs a brute-force attack to recover the encryption key for an AES
 
 ## How to Validate the Flag?
 The correct flag will be a string in the format flag{xxxxxxxx}, the script stops as soon as a matching flag is found.
+In our case the flag obtained was: flag{bmwtblvtnbjcelod}.
 
 # Task 2
 
-To determine the offset required to make brute force infeasible within 10 years, we analyze the brute force rate.
+### Evaluating the Offset in `cipherspec.py`
 
-### Measuring Speed
-...
-### Calculation for 10 Years
-...
+#### Objective
+To determine the offset size in `cipherspec.py` that would render brute-forcing the key infeasible for personal computers over a 10-year period. The evaluation is based on experimentally calculating the number of keys that can be tested within a short duration and extrapolating to 10 years. Parallelization is ignored in this calculation.
+
+#### Experimental Methodology
+   - The script was executed on a personal computer.
+   - The brute force script was modified to track the number of keys tested per second, keys testable in 10 years, and the minimum offset required.
+
+The script used looks like this:
+
+```python
+from itertools import product
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from binascii import unhexlify
+import time
+
+# Fixed part of the key (13 bytes of zeros as per cipherspec.py)
+fixed_part = b'\x00' * 13
+
+# Nonce and ciphertext provided in hexadecimal
+nonce = unhexlify("0893e471df5011a854c486098c5ae7c6")
+ciphertext = unhexlify("d010a56a6230ad26ccf9387878bde941763779dacba3")
+
+# Track how many keys are tested
+tested_keys = 0
+start_time = time.time()
+
+# Iterate through all possible combinations of the last 3 bytes of the key
+for key_suffix in product(range(256), repeat=3): 
+    key = fixed_part + bytes(key_suffix)  # Construct the full key
+    cipher = Cipher(algorithms.AES(key), modes.CTR(nonce))
+    decryptor = cipher.decryptor()
+
+    try:
+        # Try to decrypt the ciphertext
+        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+        # Check if the plaintext matches the expected flag format
+        if plaintext.startswith(b"flag{") and plaintext.endswith(b"}"):
+            print(f"Flag encontrada: {plaintext.decode()}")
+            break
+    except Exception:
+        continue  # Ignore any errors during decryption
+    
+    # Increment the tested keys count
+    tested_keys += 1
+    # Print progress every 100,000 keys
+    if tested_keys % 100000 == 0:
+        elapsed_time = time.time() - start_time
+        print(f"Keys tested: {tested_keys}, Time elapsed: {elapsed_time:.2f}s")
+
+# Calculate and print the performance
+elapsed_time = time.time() - start_time
+keys_per_second = tested_keys / elapsed_time
+print(f"Keys tested per second: {keys_per_second}")
+
+seconds_in_10_years = 10 * 365.25 * 24 * 60 * 60  # 10 years in seconds
+keys_in_10_years = keys_per_second * seconds_in_10_years
+print(f"Keys testable in 10 years: {keys_in_10_years}")
+
+required_keyspace = keys_in_10_years + 1  # Ensure keyspace exceeds testable keys
+required_offset = 0
+while 256**required_offset < required_keyspace:
+    required_offset += 1
+print(f"Minimum offset required: {required_offset}")
+
+```
+#### Results obtained
+
+- **Keys per second**: `77382`
+- **Seconds in 10 years**: `10 * 365.25 * 24 * 3600 = 315576000 seconds`
+- **Total keys testable in 10 years**: `77382 * 315576000=24419913961709`
+
+Given the AES key size (`16 bytes`), the total key space is `2^(8 * offset)` for a given offset. For the attack to be infeasible:
+
+$$
+offset  > \frac{log2(2441991396170)}{8}
+$$
+
+or
+
+$$
+offset  > \frac{44.512}{8} ≈ 5.564
+$$
+
+
+
+#### Conclusion
+To ensure the encryption is secure against brute-force attacks over a 10-year period, the offset size must be at least **6 bytes** (rounding up the calculated value), which confirms the output obtained in our code. Using a smaller offset would expose the system to potential brute-force vulnerabilities given the computational power of modern personal computers. This analysis underscores the importance of choosing a sufficiently large offset for secure key generation.
+
+
 
 
 
