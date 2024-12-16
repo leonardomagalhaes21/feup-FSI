@@ -228,10 +228,10 @@ coefficient:
 
 ## Task 2 - Generating a Certificate Request for Your Web Server
 
-Geramos através do seguinte comando certificado para o site `www.bank32.com`:
+Geramos através do seguinte comando certificado para o site `www.torres2024.com`:
 
 ```bash
-openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.bank32.com/O=Bank32 Inc./C=US" -passout pass:dees -addext "subjectAltName=DNS:www.bank32.com,DNS:www.bank32A.com,DNS:www.bank32B.com"
+openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.torres2024.com/O=torres2024 Inc./C=US" -passout pass:dees -addext "subjectAltName=DNS:www.torres2024.com,DNS:www.torres2024A.com,DNS:www.torres2024B.com"
 ```
 
 Com isto obtivemos dois ficheiros: o RSA do site e o Certificado do site.
@@ -334,7 +334,7 @@ coefficient:
 Certificate Request:
     Data:
         Version: 1 (0x0)
-        Subject: CN = www.bank32.com, O = Bank32 Inc., C = US
+        Subject: CN = www.torres2024.com, O = torres2024 Inc., C = US
         Subject Public Key Info:
             Public Key Algorithm: rsaEncryption
                 RSA Public-Key: (2048 bit)
@@ -387,87 +387,7 @@ Para gerar um certificado para o nosso próprio servidor www.bank32.com, foi nec
 $ openssl ca -config openssl.cnf -policy policy_anything -md sha256 -days 3650 -in server.csr -out server.crt -batch -cert ca.crt -keyfile ca.key
 ```
 
-O conteúdo do ficheiro `server.crt` permite confirmar que se trata de um certificado para o servidor supracitado:
-
-```bash
-Certificate:
-    Data:
-        Version: 3 (0x2)
-        Serial Number: 4096 (0x1000)
-        Signature Algorithm: sha256WithRSAEncryption
-        Issuer: CN = www.modelCA.com, O = Model CA LTD., C = US
-        Validity
-            Not Before: Dec 15 20:20:36 2024 GMT
-            Not After : Dec 13 20:20:36 2034 GMT
-        Subject: C = US, O = Bank32 Inc., CN = www.bank32.com
-        Subject Public Key Info:
-            Public Key Algorithm: rsaEncryption
-                RSA Public-Key: (2048 bit)
-                Modulus:
-                    00:b0:2f:f0:8d:a4:0b:7b:63:a4:fa:e0:14:2e:a1:
-                    0f:47:e3:17:45:b5:a3:57:a7:2c:33:1a:e8:28:d7:
-                    49:ec:f5:6b:70:63:f6:8d:ff:d3:1a:25:ae:cc:fe:
-                    5e:0c:f5:bf:4a:3d:ae:ac:ef:99:de:df:ab:66:31:
-                    61:e6:54:59:40:0c:f6:75:ca:95:88:fa:91:72:79:
-                    f4:d3:e8:32:5a:2a:7a:10:6a:da:50:58:f6:5c:57:
-                    22:0a:6a:29:8b:a3:d7:e8:ca:89:28:a7:8b:36:fa:
-                    8a:bd:27:d7:86:fe:c0:74:e8:82:07:4a:f3:78:31:
-                    82:cd:d4:6f:51:7e:c8:66:c4:e3:82:7f:b2:39:4d:
-                    59:29:f9:e8:d5:da:c7:c3:24:49:88:01:19:df:4d:
-                    83:40:54:34:67:aa:b6:c9:95:b5:b0:a7:1a:09:b0:
-                    1d:28:8e:fe:23:e9:4c:1d:d4:f0:34:56:70:9c:69:
-                    99:9d:f5:61:55:8b:54:e1:12:9c:6b:8c:b0:88:b7:
-                    14:34:ea:23:f9:51:77:88:6f:2a:e0:ff:90:53:69:
-                    b6:7d:65:ff:3e:cb:bc:80:2c:90:96:19:b0:3c:17:
-                    4c:46:f8:5b:b4:4a:17:8a:be:74:d9:4f:b9:0a:e3:
-                    95:26:a4:f8:5e:d1:77:2b:7d:b0:b1:96:36:20:37:
-                    6e:af
-                Exponent: 65537 (0x10001)
-        X509v3 extensions:
-            X509v3 Basic Constraints: 
-                CA:FALSE
-            Netscape Comment: 
-                OpenSSL Generated Certificate
-            X509v3 Subject Key Identifier: 
-                0F:44:45:01:1E:CD:8D:42:31:EF:F2:26:43:7B:AF:6B:FA:B9:7F:81
-            X509v3 Authority Key Identifier: 
-                keyid:2E:F5:28:5B:3B:ED:12:3E:99:44:9F:22:7F:9F:06:00:47:7E:E2:F8
-
-            X509v3 Subject Alternative Name: 
-                DNS:www.bank32.com, DNS:www.bank32A.com, DNS:www.bank32B.com
-    Signature Algorithm: sha256WithRSAEncryption
-         25:f9:86:d1:d5:2c:30:bc:13:ee:fe:d4:07:42:e1:e6:3b:52:
-         b8:9b:3f:94:22:13:b2:7c:65:83:c5:9d:5b:69:8a:58:9b:e6:
-         2e:96:2b:78:c9:c3:71:68:df:7f:d0:59:f4:2c:c6:c9:3a:b9:
-         8d:4f:74:21:53:61:44:f3:5d:2a:04:dc:83:52:51:57:24:0b:
-         57:dd:4d:56:0d:12:7e:ca:41:db:53:b0:6c:11:90:19:df:a3:
-         b5:82:64:db:e0:c6:61:1d:73:41:b5:47:bd:37:19:10:0f:68:
-         52:26:f5:84:a3:3e:cf:50:3d:d0:95:b6:74:54:84:bd:12:83:
-         f8:f7:2e:13:fb:2f:69:76:fe:c8:c7:da:80:b8:e6:b2:8b:71:
-         97:39:e6:f2:2d:86:61:b8:30:85:a2:fc:67:13:80:af:eb:f7:
-         5b:0e:df:cd:36:97:9f:e0:83:eb:cb:45:05:05:af:b4:44:d5:
-         be:1d:58:72:c2:29:6a:c9:67:26:9f:f7:35:0f:35:ca:04:67:
-         61:a2:2b:67:e9:10:11:a6:df:8f:d3:41:88:15:c9:99:cd:18:
-         6e:14:f3:a8:bd:0a:9b:77:cb:32:29:94:af:d7:99:91:89:f7:
-         e5:45:7a:bf:dc:4f:13:56:e9:73:32:a5:59:09:65:68:1c:b9:
-         c4:88:1f:3a:36:c4:f9:73:0e:dc:1e:ad:53:10:41:24:f4:2a:
-         19:48:09:5f:40:d0:93:48:e1:37:8c:bb:18:9c:84:69:90:7c:
-         88:b2:25:48:c7:42:9c:2c:4e:7b:61:7a:81:e7:69:aa:26:91:
-         9d:ba:f2:b5:3d:54:51:82:56:57:c6:0b:7f:f0:45:f1:f9:17:
-         82:e8:ab:60:01:9e:08:fd:2d:69:64:bb:69:8b:e7:37:36:b3:
-         2c:ce:4a:f3:67:54:9a:92:d1:04:ee:dd:6c:85:6f:a7:0f:99:
-         62:ed:6e:88:8c:c3:07:0e:8e:61:f7:bf:51:f3:5f:df:54:8c:
-         7e:40:27:d0:c9:a1:73:37:58:c1:57:e6:b9:6b:27:dc:94:f5:
-         3d:4c:dd:1b:99:9e:4e:9d:c6:9d:a1:20:e0:82:41:ed:ce:52:
-         0d:5f:a4:54:5e:43:6a:75:14:d8:fd:e5:b0:22:84:fd:f0:b9:
-         cc:bf:44:25:e2:92:26:8b:b4:8d:bc:c0:8c:1c:4e:a9:45:f1:
-         25:5a:e1:51:2c:9c:1f:1d:61:9e:4d:a9:18:64:6b:6d:20:f9:
-         c5:98:a4:ee:e5:24:79:06:f7:f1:fe:b9:ed:de:e2:26:f6:58:
-         b3:f4:d5:8c:28:2c:e4:f9:eb:da:e0:1b:3b:a5:f1:4a:d5:02:
-         8c:12:49:2c:4b:08:f8:ee
-[12/15/24]seed@VM:~/.../logbook11$ 
-```
-Para vertificar que, descomentamos a linha "descomentar copy_extensions = copy" do ficheiro "openssl.cnf" e corremos o seguinte código:
+Para vertificar que, descomentamos a linha copy_extensions = copy do ficheiro "openssl.cnf" e corremos o seguinte código:
 
 ```bash
 $ openssl x509 -in server.crt -text -noout
@@ -475,27 +395,78 @@ $ openssl x509 -in server.crt -text -noout
 
 O output permitiu verificar que o certificado abrange todos os nomes colocados na tarefa 2:
 
-    X509v3 Subject Alternative Name: 
-        DNS:www.bank32.com, DNS:www.bank32A.com, DNS:www.bank32B.com
+     X509v3 Subject Alternative Name: 
+        DNS:www.torres2024.com, DNS:www.torres2024A.com, DNS:www.torres2024B.com
+
 
 
 
 ## Task 4 - Deploying Certificate in an Apache-Based HTTPS Website
 
-Copiamos os ficheiros "server.ctf" e "server.key" para a pasta partilhada `/volumes` e mudamos os nomes para bank32, com a respetiva extensão. Modificamos o ficheiro "etc/apache2/sites-available/bank32_apache_ssl.conf" dentro do container, para que o certificado e chave usados sejam os da pasta partilhada:
+Copiamos os ficheiros "server.ctf" e "server.key" para a pasta partilhada `/volumes` e mudamos os nomes para torres2024, com a respetiva extensão. Modificamos o ficheiro "etc/apache2/sites-available/torres2024_apache_ssl.conf" dentro do container, para que o certificado e chave usados sejam os da pasta partilhada:
 
-```note
+```bash
 <VirtualHost *:443> 
-    DocumentRoot /var/www/bank32
-    ServerName www.bank32.com
-    ServerAlias www.bank32A.com
-    ServerAlias www.bank32B.com
-    ServerAlias www.bank32W.com
+    DocumentRoot /var/www/torres2024
+    ServerName www.torres2024.com
+    ServerAlias www.torres2024A.com
+    ServerAlias www.torres2024B.com
     DirectoryIndex index.html
     SSLEngine On 
-    SSLCertificateFile /volumes/bank32.crt
-    SSLCertificateKeyFile /volumes/bank32.key
+    SSLCertificateFile /certs/torres2024.crt
+    SSLCertificateKeyFile /certs/torres2024.key
 </VirtualHost>
+
+<VirtualHost *:80> 
+    DocumentRoot /var/www/torres2024
+    ServerName www.torres2024.com
+    DirectoryIndex index_red.html
+</VirtualHost>
+
+# Set the following gloal entry to suppress an annoying warning message
+ServerName localhost
+```
+
+Atualizamos o docker-compose.yml e o dockerfile:
+```bash
+version: "3"
+
+services:
+    web-server:
+        build: ./demoCA
+        image: seed-image-www-pki
+        container_name: www-10.9.0.80
+        tty: true
+        volumes:
+            - ./volumes:/volumes
+
+        networks:
+            net-10.9.0.0:
+                ipv4_address: 10.9.0.80
+
+networks:
+    net-10.9.0.0:
+        name: net-10.9.0.0
+        ipam:
+            config:
+                - subnet: 10.9.0.0/24
+```
+
+```bash
+FROM handsonsecurity/seed-server:apache-php
+
+ARG WWWDIR=/var/www/torres2024
+
+COPY ./index.html ./index_red.html $WWWDIR/
+COPY ./torres2024_apache_ssl.conf /etc/apache2/sites-available
+COPY ./certs/torres2024.crt ./certs/torres2024.key  /certs/
+
+RUN  chmod 400 /certs/torres2024.key \
+     && chmod 644 $WWWDIR/index.html \
+     && chmod 644 $WWWDIR/index_red.html \
+     && a2ensite torres2024_apache_ssl   
+
+CMD  tail -f /dev/null
 ```
 
 Para iniciar o servidor Apache foi necessário primeiro abrir uma shell no container e inserir os seguintes comandos:
@@ -504,20 +475,27 @@ Para iniciar o servidor Apache foi necessário primeiro abrir uma shell no conta
 $ service apache2 start
 ```
 
-Acedemos ao *site* `https://bank32.com`, mas verificamos que a ligação era insegura (não estava encriptada):
+```
+root@9b0e1b28a8be:/# service apache2 start
+ * Starting Apache httpd web server apache2                                     Enter passphrase for SSL/TLS keys for www.torres2024.com:443 (RSA):
+ * 
+
+```
+
+Acedemos ao *site* `https://torres2024.com`, mas verificamos que a ligação era insegura (não estava encriptada):
 
 ![3](/docs/images/logbook11-3.png)
 
 Para tornar a nossa ligação segura, adicionamos o certificado CA que geramos às autoridades no browser, em `about:preferences#privacy` -> Certificates -> View Certificates -> Authorities -> Import, e verificamos que a ligação passou a ser segura.
-
+![4](/docs/images/logbook11-4.png)
 
 ## Task 5 - Launching a Man-In-The-Middle Attack
 
-Após alterar o arquivo /etc/hosts/ para adicionar a entrada example.com, embora ainda possamos visitar https://www.example.com/, recebemos um aviso do Firefox informando que a nossa ligação não é segura. Isso ocorre porque example.com não foi incluído como um nome de assunto ao gerar o pedido de certificado para o nosso servidor. O que conseguimos foi um DNS spoofing (falsificação de DNS): ao visitar example.com, somos, na verdade, redirecionados para o site do atacante, embora recebamos o aviso de ligação insegura.
+Após alterar o arquivo /etc/hosts/ para adicionar a entrada example.com, embora ainda possamos visitar https://www.example.com/, recebemos um aviso do Firefox informando que a nossa ligação não é segura. Isso ocorre porque example.com não foi incluído como um subject name ao gerar o pedido de certificado para o nosso servidor. O que conseguimos foi um DNS spoofing (falsificação de DNS): ao visitar example.com, somos, na verdade, redirecionados para o site do atacante, embora recebamos o aviso de ligação insegura.
 
 ## Task 6: Launching a Man-In-The-Middle Attack with a Compromised CA
 
-Com o atacante tendo acesso à chave privada da autoridade de certificação (CA) raiz, ele pode gerar qualquer certificado. Com este acesso, podemos simplesmente adicionar www.example.com ao campo subjectAltName usando a opção -addext "subjectAltName"=, gerar um arquivo .csr e, em seguida, assiná-lo com a chave privada da CA, utilizando os mesmos comandos descritos nas Tarefas 3 e 4. Isso permite redirecionar o utilizador para torres2024.com quando ele visita example.com, sem que ele perceba. Com isso, podemos roubar informações do utilizador, por exemplo.
+Com o atacante tendo acesso à chave privada da autoridade de certificação (CA) raiz, ele pode gerar qualquer certificado. Com este acesso, podemos simplesmente adicionar www.example.com ao campo subjectAltName usando a opção -addext "subjectAltName"=, gerar um arquivo .csr e, em seguida, assiná-lo com a chave privada da CA, utilizando os mesmos comandos descritos nas Tasks 3 e 4. Isso permite redirecionar o utilizador para torres2024.com quando ele visita example.com, sem o seu conhecimento. Com isso, podemos usufruir de tudo o que o utilizador acede, como por exemplo os seus dados.
 
 ### Resposta à Questão 2:
 
