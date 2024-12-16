@@ -381,7 +381,7 @@ Certificate Request:
 
 ## Task 3 - Generating a Certificate for your server
 
-Para gerar um certificado para o nosso próprio servidor www.bank32.com, foi necessário correr o seguinte comando:
+Para gerar um certificado para o nosso próprio servidor www.torres2024.com, foi necessário correr o seguinte comando:
 
 ```bash
 $ openssl ca -config openssl.cnf -policy policy_anything -md sha256 -days 3650 -in server.csr -out server.crt -batch -cert ca.crt -keyfile ca.key
