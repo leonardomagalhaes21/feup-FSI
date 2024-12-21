@@ -33,6 +33,8 @@ We then started pinging host B from host A:
 <br> ![image2](docs/images/lb13_2.jpg) <br>
 As we can see, the sniffing program was able to capture the packets:
 <br> ![image3](docs/images/lb13_3.jpg) <br>
+Here we can see the different layers: The Ethernet layer showed the source and destination MAC addresses and the packet type as IPv4. The IP layer included the source IP 10.9.0.6 and destination IP 10.9.0.5, along with TTL and the ICMP protocol. The ICMP layer showed an Echo Request (ping) with code 0. The raw data displayed the payload in hexadecimal format.
+
 If we ran the program without root previleges, we would get an error:
 <br> ![image4](docs/images/lb13_4.jpg) <br>
 This happens because only root can access raw sockets, which are necessary for packet sniffing.
